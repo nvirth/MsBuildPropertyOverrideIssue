@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk" InitialTargets="MyInitialTarget">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,5 +6,18 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <CompileDependsOn>MyTarget;$(CompileDependsOn)</CompileDependsOn>
+  </PropertyGroup>
+
+  <Target Name="MyTarget">
+    <Message Text="MyTarget run. " />
+  </Target>
+
+  <Target Name="MyInitialTarget">
+    <Message Text="CompileDependsOn should contain 'MyTarget', but it does not. See:" />
+    <Message Text="CompileDependsOn: $(CompileDependsOn)" />
+  </Target>
 
 </Project>
